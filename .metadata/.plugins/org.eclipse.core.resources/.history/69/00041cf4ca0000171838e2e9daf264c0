@@ -1,0 +1,8 @@
+package com.hotels.beans;
+
+import java.util.List;
+
+public class Hotel {
+
+	List<HotelsResponseBean> hotels
+}

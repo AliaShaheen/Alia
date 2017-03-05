@@ -1,0 +1,19 @@
+package com.hotels.beans;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class Hotels {
+
+	 @JsonProperty("offers.Hotel")
+	List<Hotel> hotels;
+
+	public List<Hotel> getHotels() {
+		return hotels;
+	}
+
+	public void setHotels(List<Hotel> hotels) {
+		this.hotels = hotels;
+	}
+}

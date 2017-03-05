@@ -1,0 +1,87 @@
+package com.hotels.web;
+
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
+
+import com.hotels.beans.HotelSearchCritieria;
+import com.hotels.beans.Hotels;
+import com.hotels.beans.Offers;
+import com.rest.hotels.HttpRequestClient;
+
+/*
+ * @author alias
+ */
+
+@Named
+@ViewScoped
+public class SearchHotelsAction implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3212844015443630096L;
+
+	private HotelSearchCritieria searchCriteria = new HotelSearchCritieria();
+	
+	private static String expediaURL = "https://offersvc.expedia.com/offers/v2/getOffers?scenario=deal-finder&page=foo&uid=foo&productType=Hotel";
+	
+
+	public void search(){
+		
+		System.out.println("SearchHotelsAction.search()" + getSearchCriteria().getDestinationName() );
+		System.out.println("SearchHotelsAction.search()");
+		
+		// Create request query
+        StringBuilder requestQuery = new StringBuilder();
+        requestQuery.append("destinationName")
+                .append("=")
+                .append(getSearchCriteria().getDestinationName());
+        String requestFullURL = requestQuery.toString();
+        System.out.println("SearchHotelsAction.search() url : " + requestFullURL);
+        
+        // Call expedia backend
+        Offers hotelResponseBean = callBackend(requestQuery.toString());
+        System.out.println("SearchHotelsAction.search()");
+	}
+	
+	 public Offers callBackend(String query)  {
+	        // Get backend system URL from System Parameter EJB
+	        String backendURL = expediaURL;
+	        
+	        // call the backend
+	        HttpRequestClient httpRequestClient= new HttpRequestClient();
+	        return httpRequestClient.sendHttpPost(backendURL, query);
+	    }
+	
+	
+	public void onDateSelect(SelectEvent event) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		facesContext.addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected",
+						format.format(event.getObject())));
+	}
+
+	public void click() {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+
+		requestContext.update("form:display");
+		requestContext.execute("PF('dlg').show()");
+	}
+	public HotelSearchCritieria getSearchCriteria() {
+		return searchCriteria;
+	}
+	public void setSearchCriteria(HotelSearchCritieria searchCriteria) {
+		this.searchCriteria = searchCriteria;
+	}
+
+	
+}

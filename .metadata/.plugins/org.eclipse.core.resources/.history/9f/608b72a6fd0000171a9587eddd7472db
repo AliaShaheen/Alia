@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<!-- Bootstrap -->
+<h:outputStylesheet name="bootstrap.css" library="css" />
+<h:outputStylesheet name="bootstrap.min.css" library="css" />
+<h:body>
+	<h:form>
+
+		<p:panel id="search" header="Search for your next trip now!!"
+			style="margin-bottom:20px">
+			<h:panelGrid >
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+					    	<h:outputLabel value="Where do You Wanna go?" />
+							<p:inputText id="destinationName" value="#{searchHotelsAction.searchCriteria.destinationName}" />
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+						<h:outputLabel value="Do you wanna make it a fancy trip?" />
+							<p:selectOneRadio  value="#{searchHotelsAction.searchCriteria.starMax}"  
+ 							class="radio radio-primary"  layout="grid" columns="5" style="margin-top:20px; margin-bottom:20px" >
+								<f:selectItem itemLabel="Sure" itemValue="5" />
+								<f:selectItem itemLabel="Why Not" itemValue="4" />
+								<f:selectItem itemLabel="Dosent Matter" itemValue="3" />
+								<f:selectItem itemLabel="No" itemValue="2" />
+								<f:selectItem itemLabel="I Don't have enough Money" itemValue="1" />
+							</p:selectOneRadio>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<p:outputLabel for="buttonStart" value="Log off from work date" />
+							<p:calendar id="buttonStart" value="#{searchHotelsAction.searchCriteria.startDate}" showOn="button" />
+
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<p:outputLabel for="button" value="Back to real life date" />
+							<p:calendar id="button" value="#{searchHotelsAction.searchCriteria.endDate}" showOn="button" />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<p:commandButton  class="btn btn-primary" action="#{searchHotelsAction.search()}" value="Search For Hotel" />
+						</div>
+					</div>
+				</div>
+
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel id="results" header="awesome offers goes here"	style="margin-bottom:20px">
+
+			<h:panelGrid columns="2" cellpadding="10">
+				
+<div class="row">
+			<h:form id="searchTable">
+				<div class="col-lg-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-content">
+							<div style="overflow-x: scroll;">
+
+ 						<p:dataTable id = "offersList" value="#{searchHotelsAction.hotel}"
+									var="result" emptyMessage="No data found let go somewhere else"
+									tableStyleClass="table table-striped table-bordered table-hover">
+									
+									  <p:column headerText="City"  >
+										  <h:outputLabel value="result.destination.city">
+									</p:column>
+									
+									 <f:facet name="{DataTableTotal}">
+										<h:outputFormat 
+											value="#{msg['total']}">
+											<f:param
+												value="#{searchHotelsAction.hotel.rowCount}" />
+										</h:outputFormat>
+									</f:facet> 
+									
+								</p:dataTable> 
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</div>
+		
+
+			</h:panelGrid>
+
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,5 @@
+package com.hotels.beans;
+
+public class HotelInfo {
+
+}

@@ -1,0 +1,150 @@
+/**
+ * 
+ */
+package com.rest.hotels;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.util.Map;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hotels.beans.Offers;
+
+
+
+public class HttpRequestClient {
+    
+	
+	
+    public  Offers sendHttpPost(String urlValue, String query) {
+//        StringBuffer output = new StringBuffer();
+//        Map<String,String> mapOutput = null;
+//        
+//        if(urlValue == null || urlValue.trim().length() == 0) {
+//            throw new IllegalArgumentException("The passed backend URL value must NOT be null or empty");
+//        }
+//        
+//        int connectTimeOutInMilliSeconds = 60000;
+//        
+//        int readTimeOutInMilliSeconds = 60000;
+//        URL url = null; 
+//        URLConnection conn = null;
+//        
+//        
+//        try {
+//        	
+//            // Send the request
+//            url = new URL(urlValue);
+//            conn = url.openConnection();
+//            
+//            conn.setConnectTimeout(connectTimeOutInMilliSeconds);
+//            conn.setReadTimeout(readTimeOutInMilliSeconds);
+//            
+//            
+//            conn.connect();
+//        } catch (IOException e) {
+//            System.out.println("HibHttpRequestClienternateUtil-HttpRequestClient-  An error while creating a connection with the backend");
+//        }
+//        
+//        try {
+//            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+//            
+//            //write parameters
+//            writer.write("");
+//            writer.flush();
+//            
+//            writer.close();
+//        } catch (IOException e) {
+//        	System.out.println("HibHttpRequestClienternateUtil-HttpRequestClient- An error while sending a request to the backend");
+//        }
+//        
+//        try {
+//            // Get the response
+//            output = new StringBuffer();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+//            String line;
+//            
+//            while ((line = reader.readLine()) != null) {
+//                output.append(line);
+//            }
+//            
+//            reader.close();
+//            
+//        } catch (IOException e) {
+//        	System.out.println("HibHttpRequestClienternateUtil-HttpRequestClient- An error while receiving a response from the backend");
+//        }
+//        Offers res = null ;
+//    	  try {
+//    		  res = getResponseBeanFromJsonString(output.toString(), Offers.class);
+//          } catch (Exception e) {
+//        	//TODO remove this
+//          	e.printStackTrace();
+//          	System.out.println("HibHttpRequestClienternateUtil-HttpRequestClient- An error while parsing a response from the backend");
+//          }
+          
+//          return mapOutput;
+//    	
+    	
+    	Offers res = null ;
+    	String dummyOutput =callURL(urlValue);
+    	try {
+    		callURL(urlValue + query);
+    		
+        	res = getResponseBeanFromJsonString(dummyOutput, Offers.class);
+        } catch (Exception e) {
+        	//TODO remove this
+        	e.printStackTrace();
+        	System.out.println("HibHttpRequestClienternateUtil-HttpRequestClient- An error while parsing a response from the backend");
+        }
+        
+        return res;
+    }
+    
+    public static String callURL(String myURL) {
+		System.out.println("Requeted URL:" + myURL);
+		StringBuilder sb = new StringBuilder();
+		URLConnection urlConn = null;
+		InputStreamReader in = null;
+		try {
+			URL url = new URL(myURL);
+			urlConn = url.openConnection();
+			if (urlConn != null)
+				urlConn.setReadTimeout(60 * 1000);
+			if (urlConn != null && urlConn.getInputStream() != null) {
+				in = new InputStreamReader(urlConn.getInputStream(),
+						Charset.defaultCharset());
+				BufferedReader bufferedReader = new BufferedReader(in);
+				if (bufferedReader != null) {
+					int cp;
+					while ((cp = bufferedReader.read()) != -1) {
+						sb.append((char) cp);
+					}
+					bufferedReader.close();
+				}
+			}
+		in.close();
+		} catch (Exception e) {
+			throw new RuntimeException("Exception while calling URL:"+ myURL, e);
+		} 
+ 
+		return sb.toString();
+	}
+	
+    
+    private <T> T getResponseBeanFromJsonString(String jsonString, Class<T> classType) throws JsonParseException,
+    JsonMappingException, IOException {
+    	ObjectMapper mapper = new ObjectMapper();
+    	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    	T dto = mapper.readValue(jsonString, classType);
+    	return dto;
+}
+}

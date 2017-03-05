@@ -1,0 +1,68 @@
+package com.hotels.web;
+
+
+import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+
+import com.hotels.beans.AliasBean;
+
+
+/*
+ * @author alias
+ */
+
+@ManagedBean
+public class AliasAction implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7141033641533521796L;
+
+	@ManagedProperty (value="#{aliasbean}")
+	public AliasBean aliasBean;
+	
+	private String aliasValue;
+	private String aliasAjax;
+	
+	
+	public void aliasMethod(){
+		System.out.println("AliasAction.aliasMethod()");
+	}
+	
+	public String getMessage(){
+		return "Aliaaas Message";
+	}
+
+	public AliasBean getAliasBean() {
+		return aliasBean;
+	}
+
+	public void setAliasBean(AliasBean aliasBean) {
+		this.aliasBean = aliasBean;
+	}
+
+	public String getAliasValue() {
+		
+		if(aliasBean != null){
+			aliasValue = aliasBean.getAliasValue();
+	      }  
+		return aliasValue;
+	}
+
+	public void setAliasValue(String aliasValue) {
+		this.aliasValue = aliasValue;
+	}
+
+	public String getAliasAjax() {
+		return aliasAjax;
+	}
+
+	public void setAliasAjax(String aliasAjax) {
+		System.out.println("AliasAction.setAliasAjax()"  +aliasAjax);
+		this.aliasAjax = aliasAjax;
+	}
+
+}

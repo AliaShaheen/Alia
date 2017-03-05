@@ -1,0 +1,14 @@
+com\hotels\subbeans\HotelInfo.class
+com\hotels\web\SearchHotelsAction.class
+com\hotels\subbeans\HotelUrls.class
+com\client\hotels\HttpRequestClient.class
+com\hotels\beans\HotelSearchCritieria.class
+com\hotels\subbeans\Destination.class
+com\hotels\subbeans\HotelScores.class
+com\hotels\subbeans\HotelPricingInfo.class
+com\hotels\subbeans\HotelUrgencyInfo.class
+com\hotels\beans\Hotels.class
+com\hotels\beans\Hotel.class
+com\hotels\subbeans\OfferDateRange.class
+META-INF\sisu\javax.inject.Named
+com\hotels\beans\Offers.class

@@ -1,0 +1,24 @@
+package com.hotels.beans;
+
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class Offers implements Serializable {
+
+
+	
+	@JsonProperty("offers")
+	private Hotel hotel;
+
+
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+
+}

@@ -1,0 +1,67 @@
+package com.hotels.beans;
+
+import java.io.Serializable;
+
+public class HotelsResponseBean implements Serializable{
+
+	private String hotelInfo;
+	private String hotelName;
+	private String hotelDestination;
+	private String hotelDestinationRegionID;
+	private String hotelLongDestination;
+	private String hotelStreetAddress;
+	private String hotelCity;
+	private String hotelProvince;
+	private String hotelCountryCode;
+	private String hotelLocation;
+	private String hotelLatitude;
+	private String hotelLongitude;
+	private String hotelStarRating;
+	private String hotelGuestReviewRating;
+	private String travelStartDate;
+	private String travelEndDate;
+	private String hotelImageUrl;
+	private String carPackageScore;
+	private String description;
+	private String distanceFromUser;
+	private String language;
+	private String movingAverageScore;
+	private String promotionAmount;
+	private String promotionDescription;
+	private String promotionTag;
+	private String rawAppealScore;
+	private String relevanceScore;
+	private String statusCode;
+	private String statusDescription;
+	private String carPackage;
+	private String allInclusive;
+	private String hotelUrgencyInfo;
+	private String numberOfPeopleViewing;
+	private String numberOfPeopleBooked;
+	private String numberOfRoomsLeft;
+	private String lastBookedTime;
+	private String almostSoldStatus;
+	private String link;
+	private String almostSoldOutRoomTypeInfoCollection;
+	private String airAttachEnabled;
+	private String hotelPricingInfo;
+	private String totalPriceValue;
+	private String originalPricePerNight;
+	private String hotelTotalBaseRate;
+	private String hotelTotalTaxesAndFees;
+	private String currency;
+	private String hotelTotalMandatoryTaxesAndFees;
+	private String percentSavings;
+	private String drr;
+	private String hotelUrls;
+	private String hotelScores;
+	private String movingAverageScore;
+	private String travelEndDate;
+	private String lengthOfStay;
+	private String destination;
+	private String longName;
+	private String country;
+	private String province;
+	private String city;
+	
+}

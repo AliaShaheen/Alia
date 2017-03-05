@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="257" key="DIALOG_WIDTH"/>
+		<item value="209" key="DIALOG_Y_ORIGIN"/>
+		<item value="454" key="DIALOG_X_ORIGIN"/>
+		<item value="381" key="DIALOG_HEIGHT"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="Hotels" key="selection"/>
+		<list key="findhistory">
+			<item value="hotels"/>
+			<item value="    &lt;plugins&gt;"/>
+			<item value="sethotelloca"/>
+			<item value="padding"/>
+			<item value=" padding"/>
+			<item value=" padding-right"/>
+			<item value=" padding-right: 20px;"/>
+			<item value="    padding-right: 20px;"/>
+		</list>
+		<list key="replacehistory">
+			<item value="searchHotelsAction"/>
+		</list>
+	</section>
+</section>

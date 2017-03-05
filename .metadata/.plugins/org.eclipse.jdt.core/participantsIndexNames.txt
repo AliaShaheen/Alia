@@ -1,0 +1,3 @@
+INDEX VERSION 1.126
+D:\Alias\Project\ExpediaHotel\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3861568546.index
+\HotelsSearch\src\main\resources

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="com.hotels.beans.HotelSearchCritieria"/>
+<fullyQualifiedTypeName name="com.rest.hotels.HttpRequestClient"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="com.hotels.beans.HotelsResponseBean"/>
+<fullyQualifiedTypeName name="com.hotels.subbeans.Destination"/>
+<fullyQualifiedTypeName name="com.hotels.beans.Hotel"/>
+<fullyQualifiedTypeName name="com.hotels.beans.Offers"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+</qualifiedTypeNameHistroy>

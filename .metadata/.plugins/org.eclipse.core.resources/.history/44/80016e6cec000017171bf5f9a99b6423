@@ -1,0 +1,103 @@
+package com.hotels.web;
+
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
+
+import com.hotels.beans.HotelSearchCritieria;
+import com.hotels.beans.Offers;
+import com.rest.hotels.HttpRequestClient;
+
+/*
+ * @author alias
+ */
+
+@Named
+@ViewScoped
+public class SearchHotelsAction implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3212844015443630096L;
+
+	private HotelSearchCritieria searchCriteria = new HotelSearchCritieria();
+	
+	private Offers offers;
+	
+	private static String expediaURL = "https://offersvc.expedia.com/offers/v2/getOffers?scenario=deal-finder&page=foo&uid=foo&productType=Hotel";
+	
+
+	public void search(){
+		
+		System.out.println("SearchHotelsAction.search() ...  Here we go!");
+		
+		// Create request query from the searchCriteria
+        StringBuilder searchQuery = new StringBuilder();
+        
+        try {
+        if( getSearchCriteria().getDestinationName() != null && !getSearchCriteria().getDestinationName().isEmpty()){
+				searchQuery.append("&destinationCity")
+				.append("=")
+				.append(URLEncoder.encode((getSearchCriteria().getDestinationName()), "UTF-8"));
+        }
+        if(getSearchCriteria().getStarMax()!= 0 ){
+				searchQuery.append("&destinationCity")
+				.append("=")
+				.append(URLEncoder.encode(String.valueOf(getSearchCriteria().getStarMax()), "UTF-8"));
+        }
+        
+        } catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        // Call expedia backend
+        HttpRequestClient httpRequestClient= new HttpRequestClient();
+        setOffers(httpRequestClient.sendHttpPost(expediaURL, searchQuery.toString()));
+        
+	}
+	
+	
+	public void onDateSelect(SelectEvent event) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		facesContext.addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected",
+						format.format(event.getObject())));
+	}
+
+	public void click() {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+
+		requestContext.update("form:display");
+		requestContext.execute("PF('dlg').show()");
+	}
+	public HotelSearchCritieria getSearchCriteria() {
+		return searchCriteria;
+	}
+	public void setSearchCriteria(HotelSearchCritieria searchCriteria) {
+		this.searchCriteria = searchCriteria;
+	}
+
+
+	public Offers getOffers() {
+		return offers;
+	}
+
+
+	public void setOffers(Offers offers) {
+		this.offers = offers;
+	}
+
+	
+}

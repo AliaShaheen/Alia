@@ -1,0 +1,5 @@
+package com.hotels.subbeans;
+
+public class HotelPricingInfo {
+
+}
