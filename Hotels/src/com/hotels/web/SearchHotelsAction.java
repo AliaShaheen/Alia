@@ -6,6 +6,8 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -17,7 +19,7 @@ import com.hotels.beans.HotelSearchCritieria;
  * @author alias
  */
 
-@Named
+@ManagedBean(name="searchHotelsAction")
 @ViewScoped
 public class SearchHotelsAction implements Serializable {
 
@@ -35,6 +37,12 @@ public class SearchHotelsAction implements Serializable {
 	// the URL we will call to get the results
 	private static String expediaURL = "https://offersvc.expedia.com/offers/v2/getOffers?scenario=deal-finder&page=foo&uid=foo&productType=Hotel";
 	
+
+    @PostConstruct
+    public void init() {
+    	System.out.println("SearchHotelsAction.init()");
+    }
+
 
 	 /**
      * The method in the action that will do the work!
@@ -64,7 +72,6 @@ public class SearchHotelsAction implements Serializable {
         if(getSearchCriteria().getStartDate() != null && !getSearchCriteria().getStartDate().toString().isEmpty()){
     		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     		String formatedDate = format.format(getSearchCriteria().getStartDate()).toString();
-    		System.out.println("SearchHotelsAction.search()formatedStartDate = " + formatedDate);
 				searchQuery.append("&minTripStartDate")
 				.append("=:")
 				.append(URLEncoder.encode(String.valueOf(formatedDate), "UTF-8"));
@@ -72,7 +79,6 @@ public class SearchHotelsAction implements Serializable {
         if(getSearchCriteria().getEndDate() != null && !getSearchCriteria().getEndDate().toString().isEmpty()){
     		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     		String formatedDate = format.format(getSearchCriteria().getEndDate()).toString();
-    		System.out.println("SearchHotelsAction.search()formatedEndDate = " + formatedDate);
 				searchQuery.append("&minTripEndDate")
 				.append("=:")
 				.append(URLEncoder.encode(String.valueOf(formatedDate), "UTF-8"));
